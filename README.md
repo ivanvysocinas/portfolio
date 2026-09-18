@@ -2,11 +2,11 @@
 
 ![Banner](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=2,3,4,5,6&height=220&section=header&text=Ivan%20Vysocinas&fontSize=70&fontAlignY=38&animation=fadeIn&fontColor=eaeaea)
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1000&color=E8860C&center=true&vCenter=true&width=600&lines=Full-Stack+Developer;I+turn+messy+processes+into+reliable+systems;Business+Automation+%C2%B7+SaaS+%C2%B7+High-Load+Architecture;From+idea+to+production.)](https://ivanvysocinas.dev)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&duration=3000&pause=1000&color=E8860C&center=true&vCenter=true&width=600&lines=Full-Stack+Developer;I+turn+messy+processes+into+reliable+systems;Business+Automation+%C2%B7+SaaS+%C2%B7+High-Load+Architecture;From+idea+to+production.)](https://ivanvysocinas.github.io/portfolio/)
 
 <br />
 
-[![Website](https://img.shields.io/badge/ivanvysocinas.dev-e8860c?style=for-the-badge&logoColor=white)](https://ivanvysocinas.dev)
+[![Website](https://img.shields.io/badge/ivanvysocinas.github.io%2Fportfolio-e8860c?style=for-the-badge&logoColor=white)](https://ivanvysocinas.github.io/portfolio/)
 [![Email](https://img.shields.io/badge/Email-0c0c0e?style=for-the-badge&logo=gmail&logoColor=E8860C)](mailto:ivanvysocinas@gmail.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0c0c0e?style=for-the-badge&logo=linkedin&logoColor=0A66C2)](https://www.linkedin.com/in/ivan-vysocinas-20716b38a)
 [![Telegram](https://img.shields.io/badge/Telegram-0c0c0e?style=for-the-badge&logo=telegram&logoColor=26A5E4)](https://t.me/Bugzers)
@@ -67,7 +67,7 @@ I take a manual, repetitive process apart step by step and turn it into software
 
 **SaaS Supplier Risk Platform** · **Enterprise Monitoring Dashboard** · **Internal Automation Tooling**
 
-*Case studies anonymized per NDA — details on [ivanvysocinas.dev](https://ivanvysocinas.dev)*
+*Case studies anonymized per NDA — details on [the live site](https://ivanvysocinas.github.io/portfolio/)*
 
 </div>
 
