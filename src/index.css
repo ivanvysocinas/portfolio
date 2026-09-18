@@ -2174,6 +2174,22 @@ button {
   .case-cover {
     max-height: 320px;
   }
+  .case-diagram-stage {
+    min-height: 380px;
+  }
+  .case-gallery-row {
+    align-items: stretch;
+  }
+  .diagram-panel {
+    padding: 20px 14px;
+  }
+  .diagram-flow {
+    justify-content: center;
+  }
+  .diagram-node {
+    width: 45%;
+    min-width: 120px;
+  }
 }
 
 /* ============================
