@@ -1568,6 +1568,136 @@ button {
   cursor: default;
 }
 
+.case-diagram-stage-btn {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.case-diagram-expand {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 12, 14, 0.6);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  opacity: 0.55;
+  transition: opacity 0.3s, color 0.3s, border-color 0.3s;
+}
+.case-diagram-stage-btn:hover .case-diagram-expand {
+  opacity: 1;
+  color: var(--accent);
+  border-color: rgba(232, 134, 12, 0.4);
+}
+
+/* ============================
+   DIAGRAM LIGHTBOX — fullscreen viewer, like a photo
+   ============================ */
+.diagram-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  padding: max(24px, env(safe-area-inset-top, 0px)) max(24px, env(safe-area-inset-right, 0px)) max(24px, env(safe-area-inset-bottom, 0px)) max(24px, env(safe-area-inset-left, 0px));
+  background: rgba(6, 6, 7, 0.92);
+  backdrop-filter: blur(12px);
+  animation: lightbox-fade-in 0.25s ease;
+}
+@keyframes lightbox-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.diagram-lightbox-stage {
+  flex: 1 1 auto;
+  max-width: min(1100px, 100%);
+  height: min(720px, 82vh);
+  min-height: 0;
+}
+.diagram-lightbox-close {
+  position: absolute;
+  top: max(20px, env(safe-area-inset-top, 0px));
+  right: max(20px, env(safe-area-inset-right, 0px));
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.diagram-lightbox-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.diagram-lightbox-arrow {
+  flex-shrink: 0;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.diagram-lightbox-arrow:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(232, 134, 12, 0.1);
+  transform: scale(1.08);
+}
+.diagram-lightbox-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  padding: 0 80px;
+}
+
+@media (max-width: 700px) {
+  .diagram-lightbox {
+    gap: 8px;
+    padding: 16px;
+  }
+  .diagram-lightbox-arrow {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+  .diagram-lightbox-stage {
+    height: min(600px, 70vh);
+  }
+  .diagram-lightbox-caption {
+    padding: 0 50px;
+    font-size: 12px;
+  }
+}
+
 /* The diagram is one fixed, unconstrained composition — like a photo at
    its native resolution — that fitDiagramToStage() (CaseGallery.tsx)
    scales down uniformly to fit the stage. It never reflows per breakpoint:
