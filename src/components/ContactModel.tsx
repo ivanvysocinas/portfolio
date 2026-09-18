@@ -10,7 +10,9 @@ interface ContactModelProps {
   initialModel?: string;
 }
 
-const PARTICLE_COUNT = typeof window !== 'undefined' && window.innerWidth < 768 ? 18000 : 60000;
+const IS_MOBILE = typeof window !== 'undefined' && window.innerWidth < 768;
+const PARTICLE_COUNT = IS_MOBILE ? 8000 : 60000;
+const PIXEL_RATIO = IS_MOBILE ? 1 : Math.min(window.devicePixelRatio, 2);
 
 // ─── Sample random points uniformly on triangle surfaces ───
 type V3 = [number, number, number];
@@ -235,7 +237,7 @@ const ContactModel = forwardRef<ContactModelHandle, ContactModelProps>(({ initia
     const h = container.clientHeight || 600;
 
     const renderer = new WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(PIXEL_RATIO);
     renderer.setSize(w, h);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
@@ -292,7 +294,7 @@ const ContactModel = forwardRef<ContactModelHandle, ContactModelProps>(({ initia
         blending: AdditiveBlending,
         uniforms: {
           uTime:       { value: 0 },
-          uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+          uPixelRatio: { value: PIXEL_RATIO },
           uMouse:      { value: new Vector3(9999, 9999, 9999) },
         },
         vertexShader: `
