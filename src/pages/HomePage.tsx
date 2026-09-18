@@ -132,7 +132,8 @@ export default function HomePage() {
       const hScrollWrap = document.querySelector('[data-hscroll-wrap]');
       const hScrollTrack = document.querySelector('[data-hscroll-track]');
       // Scroll-jacking a horizontal pin over touch scroll is unreliable on
-      // mobile — below tablet width the cards just stack (see CSS), so skip it.
+      // mobile — below tablet width it's a native swipe carousel instead
+      // (overflow-x + scroll-snap, see CSS), so skip the GSAP pin here.
       if (hScrollWrap && hScrollTrack && window.innerWidth > 768) {
         const getScrollWidth = () => (hScrollTrack as HTMLElement).scrollWidth - window.innerWidth;
         gsap.to(hScrollTrack, {

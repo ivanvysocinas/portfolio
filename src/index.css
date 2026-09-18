@@ -2514,27 +2514,37 @@ button {
     font-size: 18px;
   }
 
-  /* Industries — plain vertical stack on mobile, no scroll-jacking */
+  /* Industries — native swipe carousel on mobile (no JS scroll-jacking,
+     just the browser's own touch scrolling + snap) instead of the
+     pinned/translated desktop version, which fights touch scrolling. */
   .hscroll-wrap {
     height: auto;
     overflow: visible;
   }
   .hscroll-track {
-    flex-direction: column;
-    align-items: stretch;
     height: auto;
     padding: 40px 20px;
-    gap: 20px;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     transform: none !important;
   }
+  .hscroll-track::-webkit-scrollbar {
+    display: none;
+  }
   .hscroll-header {
-    width: 100%;
+    width: 82vw;
     min-width: 0;
     padding-right: 0;
+    scroll-snap-align: start;
   }
   .industry-card {
-    width: 100%;
+    width: 82vw;
+    max-width: 360px;
     height: auto;
+    scroll-snap-align: start;
   }
   .industry-card-top {
     height: 180px;
@@ -2549,8 +2559,10 @@ button {
     font-size: 13px;
   }
   .hscroll-end {
-    width: 100%;
+    width: 50vw;
+    min-width: 160px;
     padding: 20px 0;
+    scroll-snap-align: start;
   }
 
   /* Process */
