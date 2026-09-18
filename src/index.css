@@ -2572,7 +2572,7 @@ button {
     width: 82vw;
     max-width: 360px;
     height: auto;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
   }
   .industry-card-top {
     height: 180px;

@@ -69,9 +69,15 @@ export default function Industries() {
 
       {/* Mobile only: title sits above the swipe zone, which then holds
           nothing but project cards (see .hscroll-header-desktop/-mobile
-          and .hscroll-end-desktop/-mobile in index.css). */}
-      <div className="hscroll-header hscroll-header-mobile" data-industries-header-mobile>
-        {headerContent}
+          and .hscroll-end-desktop/-mobile in index.css). Plain text, no
+          word-reveal — it should just be there, not wait on a scroll
+          trigger tied to a section it no longer sits inside of. */}
+      <div className="hscroll-header hscroll-header-mobile">
+        <span className="section-label">{t.projects.label}</span>
+        <h2 className="section-title">
+          {t.projects.title[0]}<br />{t.projects.title[1]}
+        </h2>
+        <div className="line-reveal" />
       </div>
 
       {/* The whole panel is pinned on desktop — header lives inside the track there */}
