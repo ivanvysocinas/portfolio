@@ -748,6 +748,10 @@ button {
   width: 400px;
   padding-right: 20px;
 }
+.hscroll-header-mobile,
+.hscroll-end-mobile {
+  display: none;
+}
 
 .industry-card {
   flex-shrink: 0;
@@ -2273,18 +2277,37 @@ button {
 }
 .industry-readmore {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   gap: 6px;
   margin-top: 14px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: rgba(232, 134, 12, 0.12);
+  border: 1px solid rgba(232, 134, 12, 0.28);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
+  font-weight: 700;
+  color: var(--accent-light);
+  transition: background 0.3s, border-color 0.3s;
+}
+.industry-card:hover .industry-readmore {
+  background: rgba(232, 134, 12, 0.2);
+  border-color: rgba(232, 134, 12, 0.5);
 }
 .industry-card:hover .industry-readmore svg {
   transform: translateX(3px);
 }
 .industry-readmore svg {
   transition: transform 0.3s;
+}
+
+/* Touch devices have no :hover — give tapped cards their own feedback
+   so it's clear the whole card is a link, not just decoration. */
+@media (hover: none) {
+  .industry-card-link:active {
+    transform: scale(0.97);
+    border-color: rgba(232, 134, 12, 0.35);
+  }
 }
 
 .case-not-found {
@@ -2516,14 +2539,25 @@ button {
 
   /* Industries — native swipe carousel on mobile (no JS scroll-jacking,
      just the browser's own touch scrolling + snap) instead of the
-     pinned/translated desktop version, which fights touch scrolling. */
+     pinned/translated desktop version, which fights touch scrolling.
+     The title moves above the swipe zone; the swipe zone holds only
+     project cards — no header slide, no trailing link inside it. */
+  .hscroll-header-desktop,
+  .hscroll-end-desktop {
+    display: none;
+  }
+  .hscroll-header-mobile {
+    display: block;
+    width: 100%;
+    padding: 0 16px 24px;
+  }
   .hscroll-wrap {
     height: auto;
     overflow: visible;
   }
   .hscroll-track {
     height: auto;
-    padding: 40px 20px;
+    padding: 8px 20px 40px;
     gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -2533,12 +2567,6 @@ button {
   }
   .hscroll-track::-webkit-scrollbar {
     display: none;
-  }
-  .hscroll-header {
-    width: 82vw;
-    min-width: 0;
-    padding-right: 0;
-    scroll-snap-align: start;
   }
   .industry-card {
     width: 82vw;
@@ -2558,11 +2586,10 @@ button {
   .industry-desc {
     font-size: 13px;
   }
-  .hscroll-end {
-    width: 50vw;
-    min-width: 160px;
-    padding: 20px 0;
-    scroll-snap-align: start;
+  .hscroll-end-mobile {
+    display: flex;
+    width: 100%;
+    padding: 4px 0 0;
   }
 
   /* Process */

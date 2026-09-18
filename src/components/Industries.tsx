@@ -44,23 +44,42 @@ export default function Industries() {
     goTo(href, { state: { fromScrollY: window.scrollY } });
   }
 
+  const headerContent = (
+    <>
+      <span className="section-label">
+        <span className="word-reveal"><span>{t.projects.label}</span></span>
+      </span>
+      <h2 className="section-title" data-skew>
+        <span className="word-reveal"><span>{t.projects.title[0]}</span></span><br />
+        <span className="word-reveal"><span>{t.projects.title[1]}</span></span>
+      </h2>
+      <div className="line-reveal" />
+    </>
+  );
+
+  const moreLink = (
+    <a href="https://github.com/ivanvysocinas" target="_blank" rel="noopener noreferrer">
+      <span>{t.projects.more}</span>
+    </a>
+  );
+
   return (
     <section className="industries" id="projects">
       <div className="section-wipe" data-wipe />
 
-      {/* The whole panel is pinned — header lives inside the track */}
+      {/* Mobile only: title sits above the swipe zone, which then holds
+          nothing but project cards (see .hscroll-header-desktop/-mobile
+          and .hscroll-end-desktop/-mobile in index.css). */}
+      <div className="hscroll-header hscroll-header-mobile" data-industries-header-mobile>
+        {headerContent}
+      </div>
+
+      {/* The whole panel is pinned on desktop — header lives inside the track there */}
       <div className="hscroll-wrap" data-hscroll-wrap>
         <div className="hscroll-track" data-hscroll-track>
-          {/* Header as the first "slide" */}
-          <div className="hscroll-header" data-industries-header>
-            <span className="section-label">
-              <span className="word-reveal"><span>{t.projects.label}</span></span>
-            </span>
-            <h2 className="section-title" data-skew>
-              <span className="word-reveal"><span>{t.projects.title[0]}</span></span><br />
-              <span className="word-reveal"><span>{t.projects.title[1]}</span></span>
-            </h2>
-            <div className="line-reveal" />
+          {/* Header as the first "slide" (desktop only — hidden on mobile) */}
+          <div className="hscroll-header hscroll-header-desktop" data-industries-header>
+            {headerContent}
           </div>
 
           {t.projects.items.map((p, i) => {
@@ -126,11 +145,13 @@ export default function Industries() {
             );
           })}
 
-          <a href="https://github.com/ivanvysocinas" target="_blank" rel="noopener noreferrer" className="hscroll-end">
-            <span>{t.projects.more}</span>
-          </a>
+          {/* Desktop only — mobile keeps this out of the swipe zone (below) */}
+          <div className="hscroll-end hscroll-end-desktop">{moreLink}</div>
         </div>
       </div>
+
+      {/* Mobile only: the same link, placed under the swipe zone instead of inside it */}
+      <div className="hscroll-end hscroll-end-mobile">{moreLink}</div>
     </section>
   );
 }

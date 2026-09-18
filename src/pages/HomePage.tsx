@@ -77,6 +77,7 @@ export default function HomePage() {
       const revealGroups = [
         '[data-services-left]',
         '[data-industries-header]',
+        '[data-industries-header-mobile]',
         '[data-process-header]',
         '[data-about-text]',
         '[data-contact-inner]',
