@@ -18,7 +18,7 @@ export default function App() {
 
   return (
     <I18nProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/portfolio">
         <SmoothScroll />
         <ScrollToTop />
         <PageTransitionProvider>

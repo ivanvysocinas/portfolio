@@ -8,17 +8,17 @@
   <meta name="keywords" content="full-stack developer, web development, business automation, SaaS, React, TypeScript, Next.js, Node.js" />
   <meta name="author" content="Ivan Vysocinas" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://ivanvysocinas.dev/" />
+  <link rel="canonical" href="https://ivanvysocinas.github.io/portfolio/" />
   <meta name="theme-color" content="#0c0c0e" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Ivan Vysocinas — Full-Stack Developer" />
   <meta property="og:description" content="Full-stack developer building business automation tools, SaaS platforms, and scalable backend systems." />
-  <meta property="og:url" content="https://ivanvysocinas.dev/" />
+  <meta property="og:url" content="https://ivanvysocinas.github.io/portfolio/" />
   <meta property="og:site_name" content="Ivan Vysocinas" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://ivanvysocinas.dev/og-image.png" />
+  <meta property="og:image" content="https://ivanvysocinas.github.io/portfolio/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="Ivan Vysocinas — Full-Stack Developer" />
@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Ivan Vysocinas — Full-Stack Developer" />
   <meta name="twitter:description" content="Full-stack developer building business automation tools, SaaS platforms, and scalable backend systems." />
-  <meta name="twitter:image" content="https://ivanvysocinas.dev/og-image.png" />
+  <meta name="twitter:image" content="https://ivanvysocinas.github.io/portfolio/og-image.png" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -36,7 +36,7 @@
     "@type": "Person",
     "name": "Ivan Vysocinas",
     "jobTitle": "Full-Stack Developer",
-    "url": "https://ivanvysocinas.dev",
+    "url": "https://ivanvysocinas.github.io/portfolio",
     "email": "mailto:ivanvysocinas@gmail.com",
     "sameAs": [
       "https://github.com/ivanvysocinas",
@@ -50,7 +50,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Ivan Vysocinas — Portfolio",
-    "url": "https://ivanvysocinas.dev"
+    "url": "https://ivanvysocinas.github.io/portfolio"
   }
   </script>
 
@@ -61,6 +61,18 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Restore the real route after the 404.html GitHub Pages SPA redirect -->
+  <script type="text/javascript">
+    (function (l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function (s) {
+          return s.replace(/~and~/g, '&');
+        }).join('?');
+        window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+      }
+    }(window.location));
+  </script>
 </head>
 <body>
   <div id="root"></div>

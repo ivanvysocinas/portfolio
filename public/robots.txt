@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /assets/
 
-Sitemap: https://ivanvysocinas.dev/sitemap.xml
+Sitemap: https://ivanvysocinas.github.io/portfolio/sitemap.xml
