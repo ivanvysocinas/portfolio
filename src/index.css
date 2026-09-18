@@ -2051,7 +2051,6 @@ button {
 @media (max-width: 700px) {
   .diagram-panel { padding: 28px 20px; }
   .case-diagram-stage { min-height: 620px; }
-  .diagram-node { width: 130px; }
   .diagram-out-card { width: 200px; }
   .diagram-feature-grid { grid-template-columns: 1fr; }
   .diagram-sync-flow { flex-direction: column; }
@@ -2059,6 +2058,31 @@ button {
   .diagram-sync-link-line { width: 60px; }
   .case-gallery-row { gap: 8px; }
   .case-gallery-arrow { width: 36px; height: 36px; }
+
+  /* Visual builder flow — stack nodes instead of wrapping them mid-connector */
+  .diagram-flow {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .diagram-node {
+    width: 100%;
+  }
+  .diagram-connector {
+    flex: 0 0 auto;
+    width: 2px;
+    height: 20px;
+    min-width: 0;
+    align-self: center;
+    background: repeating-linear-gradient(180deg, rgba(232, 134, 12, 0.45) 0 8px, transparent 8px 14px);
+  }
+  .diagram-connector::after {
+    right: 50%;
+    top: auto;
+    bottom: -2px;
+    transform: translate(50%, 0);
+  }
 }
 
 .case-body-grid {
@@ -2191,13 +2215,6 @@ button {
   }
   .diagram-panel {
     padding: 20px 14px;
-  }
-  .diagram-flow {
-    justify-content: center;
-  }
-  .diagram-node {
-    width: 45%;
-    min-width: 120px;
   }
 }
 
