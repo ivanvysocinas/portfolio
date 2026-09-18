@@ -1,6 +1,7 @@
 import type { MouseEvent } from 'react';
 import { useI18n } from '../i18n/context';
 import { onSpotlightMove } from '../utils/spotlight';
+import { withBase } from '../utils/withBase';
 import { usePageTransition } from './PageTransition';
 
 // Placeholder covers (no real screenshots yet) — dark gradient + card index,
@@ -69,7 +70,7 @@ export default function Industries() {
                 <div className="industry-card-top" onMouseMove={onTiltMove} onMouseLeave={onTiltLeave}>
                   <img
                     className="industry-card-img"
-                    src={hasCaseStudy && 'detail' in p && p.detail ? p.detail.cover : placeholderCover(i)}
+                    src={hasCaseStudy && 'detail' in p && p.detail ? withBase(p.detail.cover) : placeholderCover(i)}
                     alt={p.title}
                     loading="lazy"
                     width={800}

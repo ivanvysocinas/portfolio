@@ -3,6 +3,7 @@ import type { ContactModelHandle } from './ContactModel';
 import MagneticButton from './MagneticButton';
 import { useI18n } from '../i18n/context';
 import LazyVisible from './LazyVisible';
+import { withBase } from '../utils/withBase';
 const ContactModel = lazy(() => import('./ContactModel'));
 
 export default function Contact() {
@@ -16,7 +17,7 @@ export default function Contact() {
   function switchTo(idx: number) {
     if (idx === activeIdx || animating) return;
     setAnimating(true);
-    modelRef.current?.switchModel(socials[idx].model);
+    modelRef.current?.switchModel(withBase(socials[idx].model));
     setActiveIdx(idx);
     setTimeout(() => setAnimating(false), 1200);
   }
@@ -117,7 +118,7 @@ export default function Contact() {
           </button>
 
           <LazyVisible className="contact-model-wrap">
-            <Suspense fallback={null}><ContactModel ref={modelRef} initialModel={socials[0].model} /></Suspense>
+            <Suspense fallback={null}><ContactModel ref={modelRef} initialModel={withBase(socials[0].model)} /></Suspense>
           </LazyVisible>
 
           <button className="model-arrow model-arrow-right" onClick={goNext} disabled={animating} aria-label="Next social">

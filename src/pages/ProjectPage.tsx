@@ -4,6 +4,7 @@ import { useI18n } from '../i18n/context';
 import Footer from '../components/Footer';
 import CaseGallery from '../components/CaseGallery';
 import { usePageTransition } from '../components/PageTransition';
+import { withBase } from '../utils/withBase';
 
 export default function ProjectPage() {
   const { slug } = useParams();
@@ -70,7 +71,7 @@ export default function ProjectPage() {
         {'gallery' in detail && detail.gallery ? (
           <CaseGallery gallery={detail.gallery} />
         ) : (
-          <img src={detail.cover} alt={project.title} className="case-cover" loading="eager" />
+          <img src={withBase(detail.cover)} alt={project.title} className="case-cover" loading="eager" />
         )}
       </div>
 
