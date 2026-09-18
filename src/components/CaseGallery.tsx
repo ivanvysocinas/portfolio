@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { caseDiagrams, type CaseDiagramKey } from './case-diagrams';
 
@@ -18,9 +18,25 @@ function getCenterDeltas(stage: HTMLElement, items: NodeListOf<HTMLElement>) {
   });
 }
 
+// Diagrams are laid out with fixed-ish content sizes that don't always
+// reflow cleanly into a narrow phone screen. Rather than auditing every
+// diagram's internal CSS, measure the actual rendered size and shrink the
+// whole thing uniformly so it always fits inside the stage — never wraps
+// into an extra row, never overflows.
+function fitDiagramToStage(stage: HTMLElement, content: HTMLElement) {
+  content.style.transform = 'none';
+  const availW = stage.clientWidth;
+  const availH = stage.clientHeight;
+  const neededW = content.scrollWidth;
+  const neededH = content.scrollHeight;
+  const scale = Math.min(1, availW / (neededW || 1), availH / (neededH || 1));
+  content.style.transform = scale < 0.999 ? `scale(${scale})` : '';
+}
+
 export default function CaseGallery({ gallery }: CaseGalleryProps) {
   const [activeSlide, setActiveSlide] = useState(0);
   const stageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const orbRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
   const isFirstRender = useRef(true);
@@ -29,8 +45,12 @@ export default function CaseGallery({ gallery }: CaseGalleryProps) {
   // Entrance: burst outward from the center orb into place
   useLayoutEffect(() => {
     const stage = stageRef.current;
-    const items = stage?.querySelectorAll<HTMLElement>('[data-diagram-el]');
-    if (!stage || !items || !items.length) return;
+    const content = contentRef.current;
+    const items = content?.querySelectorAll<HTMLElement>('[data-diagram-el]');
+    if (!stage || !content || !items || !items.length) return;
+
+    // Scale must settle before we read any bounding rects below.
+    fitDiagramToStage(stage, content);
 
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -60,14 +80,25 @@ export default function CaseGallery({ gallery }: CaseGalleryProps) {
     };
   }, [activeSlide]);
 
+  // Re-fit on resize / orientation change without replaying the entrance animation
+  useEffect(() => {
+    const stage = stageRef.current;
+    const content = contentRef.current;
+    if (!stage || !content) return;
+    const onResize = () => fitDiagramToStage(stage, content);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   function goTo(index: number) {
     const next = ((index % gallery.length) + gallery.length) % gallery.length;
     if (next === activeSlide || isAnimating.current) return;
     isAnimating.current = true;
 
     const stage = stageRef.current;
-    const items = stage?.querySelectorAll<HTMLElement>('[data-diagram-el]');
-    if (!stage || !items || !items.length) {
+    const content = contentRef.current;
+    const items = content?.querySelectorAll<HTMLElement>('[data-diagram-el]');
+    if (!stage || !content || !items || !items.length) {
       setActiveSlide(next);
       return;
     }
@@ -107,7 +138,9 @@ export default function CaseGallery({ gallery }: CaseGalleryProps) {
 
         <div className="case-diagram-stage" ref={stageRef}>
           <div className="case-gallery-orb" ref={orbRef} />
-          <Diagram />
+          <div className="diagram-scale-wrap" ref={contentRef}>
+            <Diagram />
+          </div>
         </div>
 
         <button
