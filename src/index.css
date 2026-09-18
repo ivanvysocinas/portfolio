@@ -2188,7 +2188,7 @@ button {
      never reflowed per breakpoint, only uniformly scaled to fit by JS
      (see fitDiagramToStage in CaseGallery.tsx). Only the frame around it
      — the stage, the gallery arrows/gap — resizes here. */
-  .case-diagram-stage { min-height: 480px; }
+  .case-diagram-stage { min-height: 320px; }
   .case-gallery-row { gap: 8px; }
   .case-gallery-arrow { width: 36px; height: 36px; }
 }
@@ -2316,10 +2316,7 @@ button {
     max-height: 320px;
   }
   .case-diagram-stage {
-    min-height: 340px;
-  }
-  .case-gallery-row {
-    align-items: stretch;
+    min-height: 260px;
   }
 }
 
