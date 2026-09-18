@@ -1,4 +1,4 @@
-import { useRef, useState, lazy, Suspense, type FormEvent } from 'react';
+import { useRef, useState, lazy, Suspense, useEffect, type FormEvent } from 'react';
 import type { ContactModelHandle } from './ContactModel';
 import MagneticButton from './MagneticButton';
 import { useI18n } from '../i18n/context';
@@ -24,6 +24,23 @@ export default function Contact() {
 
   function goPrev() { switchTo((activeIdx - 1 + socials.length) % socials.length); }
   function goNext() { switchTo((activeIdx + 1) % socials.length); }
+
+  // The model GLBs are several MB each — warm the JS chunk and the default
+  // model's cache during idle time, well before the section is anywhere
+  // near the viewport, instead of only starting once it's about to scroll in.
+  useEffect(() => {
+    function warm() {
+      import('./ContactModel');
+      fetch(withBase(socials[0].model)).catch(() => {});
+    }
+    if ('requestIdleCallback' in window) {
+      const id = (window as any).requestIdleCallback(warm, { timeout: 3000 });
+      return () => (window as any).cancelIdleCallback(id);
+    }
+    const timeoutId = setTimeout(warm, 1500);
+    return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -117,7 +134,7 @@ export default function Contact() {
             </svg>
           </button>
 
-          <LazyVisible className="contact-model-wrap">
+          <LazyVisible className="contact-model-wrap" rootMargin="1200px">
             <Suspense fallback={null}><ContactModel ref={modelRef} initialModel={withBase(socials[0].model)} /></Suspense>
           </LazyVisible>
 

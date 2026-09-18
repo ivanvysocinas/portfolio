@@ -322,6 +322,13 @@ export default function HomePage() {
       };
       gsap.ticker.add(skewTicker);
 
+      // The Industries pin above is created after the word-reveal
+      // triggers, which shifts the page's effective scroll height —
+      // recompute every trigger's start/end now that it's final, so
+      // reveals near/after a pinned section don't fire at the wrong
+      // (stale) scroll position.
+      requestAnimationFrame(() => ScrollTrigger.refresh());
+
       return () => { gsap.ticker.remove(skewTicker); };
     });
     } // end init()
