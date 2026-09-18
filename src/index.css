@@ -558,7 +558,8 @@ button {
 }
 
 /* Horizontal accent line — scales from center */
-.line-reveal {
+.line-reveal,
+.line-reveal-static {
   width: 60px;
   height: 2px;
   background: var(--accent);

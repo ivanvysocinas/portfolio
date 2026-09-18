@@ -44,16 +44,16 @@ export default function Industries() {
     goTo(href, { state: { fromScrollY: window.scrollY } });
   }
 
+  // Plain text, no word-reveal / scroll-trigger dependency — this header
+  // sits right next to a pin: true horizontal-scroll ScrollTrigger, and
+  // that combination kept leaving it permanently stuck invisible.
   const headerContent = (
     <>
-      <span className="section-label">
-        <span className="word-reveal"><span>{t.projects.label}</span></span>
-      </span>
+      <span className="section-label">{t.projects.label}</span>
       <h2 className="section-title" data-skew>
-        <span className="word-reveal"><span>{t.projects.title[0]}</span></span><br />
-        <span className="word-reveal"><span>{t.projects.title[1]}</span></span>
+        {t.projects.title[0]}<br />{t.projects.title[1]}
       </h2>
-      <div className="line-reveal" />
+      <div className="line-reveal-static" />
     </>
   );
 
@@ -77,14 +77,14 @@ export default function Industries() {
         <h2 className="section-title">
           {t.projects.title[0]}<br />{t.projects.title[1]}
         </h2>
-        <div className="line-reveal" />
+        <div className="line-reveal-static" />
       </div>
 
       {/* The whole panel is pinned on desktop — header lives inside the track there */}
       <div className="hscroll-wrap" data-hscroll-wrap>
         <div className="hscroll-track" data-hscroll-track>
           {/* Header as the first "slide" (desktop only — hidden on mobile) */}
-          <div className="hscroll-header hscroll-header-desktop" data-industries-header>
+          <div className="hscroll-header hscroll-header-desktop">
             {headerContent}
           </div>
 
