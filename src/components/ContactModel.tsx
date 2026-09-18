@@ -10,7 +10,7 @@ interface ContactModelProps {
   initialModel?: string;
 }
 
-const PARTICLE_COUNT = 60000;
+const PARTICLE_COUNT = typeof window !== 'undefined' && window.innerWidth < 768 ? 18000 : 60000;
 
 // ─── Sample random points uniformly on triangle surfaces ───
 type V3 = [number, number, number];

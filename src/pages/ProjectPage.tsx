@@ -35,7 +35,7 @@ export default function ProjectPage() {
           <div className="container">
             <h1 className="section-title">{t.caseStudy.notFoundTitle}</h1>
             <p className="case-not-found-desc">{t.caseStudy.notFoundDesc}</p>
-            <a href="/#projects" className="btn btn-primary" onClick={handleBackClick}>{t.caseStudy.back}</a>
+            <a href={withBase('/#projects')} className="btn btn-primary" onClick={handleBackClick}>{t.caseStudy.back}</a>
           </div>
         </section>
         <Footer />
@@ -51,7 +51,7 @@ export default function ProjectPage() {
 
       <header className="case-hero">
         <div className="container">
-          <a href="/#projects" className="case-back" onClick={handleBackClick}>
+          <a href={withBase('/#projects')} className="case-back" onClick={handleBackClick}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M19 12H5M11 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
             </svg>

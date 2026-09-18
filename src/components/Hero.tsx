@@ -6,9 +6,9 @@ const ParticleCanvas = lazy(() => import('./ParticleCanvas'));
 function getResponsiveFont() {
   if (typeof window === 'undefined') return 160;
   const w = window.innerWidth;
-  if (w < 400) return 60;
-  if (w < 768) return 80;
-  if (w < 1024) return 120;
+  if (w < 400) return 100;
+  if (w < 768) return 130;
+  if (w < 1024) return 140;
   return 160;
 }
 

@@ -131,7 +131,9 @@ export default function HomePage() {
       // ───────────────────────────────────────────
       const hScrollWrap = document.querySelector('[data-hscroll-wrap]');
       const hScrollTrack = document.querySelector('[data-hscroll-track]');
-      if (hScrollWrap && hScrollTrack) {
+      // Scroll-jacking a horizontal pin over touch scroll is unreliable on
+      // mobile — below tablet width the cards just stack (see CSS), so skip it.
+      if (hScrollWrap && hScrollTrack && window.innerWidth > 768) {
         const getScrollWidth = () => (hScrollTrack as HTMLElement).scrollWidth - window.innerWidth;
         gsap.to(hScrollTrack, {
           x: () => -getScrollWidth(),

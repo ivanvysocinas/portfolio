@@ -111,7 +111,7 @@ export default function Industries() {
             return hasCaseStudy && 'slug' in p ? (
               <a
                 key={p.title}
-                href={`/projects/${p.slug}`}
+                href={withBase(`/projects/${p.slug}`)}
                 onClick={(e) => handleCardClick(e, `/projects/${p.slug}`)}
                 className="industry-card spotlight industry-card-link"
                 data-industry-card

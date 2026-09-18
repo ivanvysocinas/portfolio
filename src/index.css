@@ -2370,27 +2370,30 @@ button {
     font-size: 18px;
   }
 
-  /* Industries (horizontal scroll) */
+  /* Industries — plain vertical stack on mobile, no scroll-jacking */
   .hscroll-wrap {
     height: auto;
-    min-height: 100vh;
+    overflow: visible;
   }
   .hscroll-track {
+    flex-direction: column;
+    align-items: stretch;
     height: auto;
-    min-height: 100vh;
-    padding: 0 20px;
+    padding: 40px 20px;
     gap: 20px;
+    transform: none !important;
   }
   .hscroll-header {
-    width: 280px;
-    min-width: 280px;
+    width: 100%;
+    min-width: 0;
+    padding-right: 0;
   }
   .industry-card {
-    width: 280px;
-    height: 480px;
+    width: 100%;
+    height: auto;
   }
   .industry-card-top {
-    height: 150px;
+    height: 180px;
   }
   .industry-card-body {
     padding: 20px;
@@ -2400,6 +2403,10 @@ button {
   }
   .industry-desc {
     font-size: 13px;
+  }
+  .hscroll-end {
+    width: 100%;
+    padding: 20px 0;
   }
 
   /* Process */
@@ -2509,13 +2516,6 @@ button {
   }
   .section-title {
     font-size: 24px;
-  }
-  .hscroll-header {
-    width: 240px;
-    min-width: 240px;
-  }
-  .industry-card {
-    width: 250px;
   }
   .stats-row {
     grid-template-columns: 1fr;
