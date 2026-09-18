@@ -1504,6 +1504,8 @@ button {
   overflow: hidden;
   min-height: 560px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .case-diagram-stage::before {
   content: '';
@@ -1566,19 +1568,22 @@ button {
   cursor: default;
 }
 
+/* The diagram is one fixed, unconstrained composition — like a photo at
+   its native resolution — that fitDiagramToStage() (CaseGallery.tsx)
+   scales down uniformly to fit the stage. It never reflows per breakpoint:
+   flex-shrink: 0 + width: max-content stop the flex chain from squeezing
+   it (and re-triggering internal wrapping) at any viewport size. */
 .diagram-scale-wrap {
-  flex: 1;
-  min-width: 0;
-  min-height: 0;
   display: flex;
+  flex-shrink: 0;
   transform-origin: center center;
 }
 
 .diagram-panel {
   position: relative;
   z-index: 2;
-  flex: 1;
-  min-width: 0;
+  width: max-content;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   padding: 40px 56px;
@@ -2049,40 +2054,13 @@ button {
 }
 
 @media (max-width: 700px) {
-  .diagram-panel { padding: 28px 20px; }
-  .case-diagram-stage { min-height: 620px; }
-  .diagram-out-card { width: 200px; }
-  .diagram-feature-grid { grid-template-columns: 1fr; }
-  .diagram-sync-flow { flex-direction: column; }
-  .diagram-sync-link { width: auto; }
-  .diagram-sync-link-line { width: 60px; }
+  /* The diagram itself is one fixed composition (like a photo) — it's
+     never reflowed per breakpoint, only uniformly scaled to fit by JS
+     (see fitDiagramToStage in CaseGallery.tsx). Only the frame around it
+     — the stage, the gallery arrows/gap — resizes here. */
+  .case-diagram-stage { min-height: 480px; }
   .case-gallery-row { gap: 8px; }
   .case-gallery-arrow { width: 36px; height: 36px; }
-
-  /* Visual builder flow — stack nodes instead of wrapping them mid-connector */
-  .diagram-flow {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: stretch;
-    gap: 8px;
-  }
-  .diagram-node {
-    width: 100%;
-  }
-  .diagram-connector {
-    flex: 0 0 auto;
-    width: 2px;
-    height: 20px;
-    min-width: 0;
-    align-self: center;
-    background: repeating-linear-gradient(180deg, rgba(232, 134, 12, 0.45) 0 8px, transparent 8px 14px);
-  }
-  .diagram-connector::after {
-    right: 50%;
-    top: auto;
-    bottom: -2px;
-    transform: translate(50%, 0);
-  }
 }
 
 .case-body-grid {
@@ -2208,13 +2186,10 @@ button {
     max-height: 320px;
   }
   .case-diagram-stage {
-    min-height: 380px;
+    min-height: 340px;
   }
   .case-gallery-row {
     align-items: stretch;
-  }
-  .diagram-panel {
-    padding: 20px 14px;
   }
 }
 
