@@ -38,7 +38,7 @@ export default function ParticleCanvas({
 
     // ---- Scene + Camera ----
     const scene = new Scene();
-    const aspect = container.clientWidth / container.clientHeight;
+    let aspect = container.clientWidth / container.clientHeight;
     const frustumSize = 5;
     const camera = new OrthographicCamera(
       -frustumSize * aspect,
@@ -52,10 +52,13 @@ export default function ParticleCanvas({
 
     // ---- Sample text pixels from offscreen canvas ----
     function sampleTextPositions(): Float32Array {
-      // Use a small fixed-size canvas to avoid ClearType subpixel noise
+      // Use a small fixed-size canvas to avoid ClearType subpixel noise.
+      // Canvas aspect must match the container/camera aspect, otherwise the
+      // world-space mapping below (which scales X by `aspect` but not Y)
+      // stretches the sampled text on non-square viewports (e.g. mobile portrait).
       const offCanvas = document.createElement('canvas');
-      const cw = 1024;
       const ch = 512;
+      const cw = Math.max(64, Math.round(ch * aspect));
       offCanvas.width = cw;
       offCanvas.height = ch;
 
@@ -66,7 +69,7 @@ export default function ParticleCanvas({
       ctx.fillRect(0, 0, cw, ch);
 
       // Draw white text
-      const scaledFont = Math.round(fontSize * (cw / container!.clientWidth));
+      const scaledFont = Math.round(fontSize * (ch / container!.clientHeight));
       ctx.font = `800 ${scaledFont}px Inter, sans-serif`;
       ctx.fillStyle = '#fff';
       ctx.textAlign = 'center';
@@ -274,11 +277,11 @@ export default function ParticleCanvas({
     function onResize() {
       const w = container!.clientWidth;
       const h = container!.clientHeight;
-      const a = w / h;
+      aspect = w / h;
 
       renderer.setSize(w, h);
-      camera.left = -frustumSize * a;
-      camera.right = frustumSize * a;
+      camera.left = -frustumSize * aspect;
+      camera.right = frustumSize * aspect;
       camera.top = frustumSize;
       camera.bottom = -frustumSize;
       camera.updateProjectionMatrix();
